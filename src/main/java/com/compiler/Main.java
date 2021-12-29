@@ -12,9 +12,11 @@ public class Main {
         Properties pr = System.getProperties();
         String nameOC = pr.getProperty("os.name").toLowerCase();
         if(!nameOC.matches("windows.*")) {
-            throw new RuntimeException("OC System error");
+            Paths.HOME_COMPILER = Path.of(pr.getProperty("user.home")+"/Documents/JavaCompiler");
         }
-        Paths.HOME_COMPILER = Path.of(pr.getProperty("user.home")+"/Documents/JavaCompiler");
+        else {
+            Paths.HOME_COMPILER = Path.of(pr.getProperty("user.home")+"/JavaCompiler");
+        }
         File dir = new File(Paths.HOME_COMPILER.toString());
         if(!dir.exists()) {
             dir.mkdir();
